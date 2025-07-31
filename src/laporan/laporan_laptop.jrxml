@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="laporan_laptop" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1a1a1a1-0004-0004-0004-0004a1a1a1a4">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<queryString>
+		<![CDATA[SELECT id_laptop, nama_laptop, merk, harga, processor, ram, storage, battery_life, performa, kategori_harga, kategori_penyimpanan, kategori_daya_tahan, kategori_ram FROM data_laptop]]>
+	</queryString>
+	<field name="id_laptop" class="java.lang.String"/>
+	<field name="nama_laptop" class="java.lang.String"/>
+	<field name="merk" class="java.lang.String"/>
+	<field name="harga" class="java.lang.String"/>
+	<field name="processor" class="java.lang.String"/>
+	<field name="ram" class="java.lang.String"/>
+	<field name="storage" class="java.lang.String"/>
+	<field name="battery_life" class="java.lang.String"/>
+	<field name="performa" class="java.lang.String"/>
+	<field name="kategori_harga" class="java.lang.String"/>
+	<field name="kategori_penyimpanan" class="java.lang.String"/>
+	<field name="kategori_daya_tahan" class="java.lang.String"/>
+	<field name="kategori_ram" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="175" y="0" width="451" height="30" uuid="title"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN DATA LAPTOP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="30" width="451" height="20" uuid="subtitle"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Aditya Komputer]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement style="table_TH" x="0" y="0" width="60" height="30" uuid="col1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID Laptop]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="60" y="0" width="120" height="30" uuid="col2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Laptop]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="180" y="0" width="80" height="30" uuid="col3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Merk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="260" y="0" width="80" height="30" uuid="col4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="340" y="0" width="100" height="30" uuid="col5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Processor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="440" y="0" width="60" height="30" uuid="col6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="500" y="0" width="80" height="30" uuid="col7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Storage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="580" y="0" width="80" height="30" uuid="col8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Battery Life]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="660" y="0" width="80" height="30" uuid="col9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Performa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement style="table_TD" x="0" y="0" width="60" height="20" uuid="field1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_laptop}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="60" y="0" width="120" height="20" uuid="field2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_laptop}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="180" y="0" width="80" height="20" uuid="field3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{merk}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="260" y="0" width="80" height="20" uuid="field4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{harga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="340" y="0" width="100" height="20" uuid="field5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{processor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="440" y="0" width="60" height="20" uuid="field6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ram}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="500" y="0" width="80" height="20" uuid="field7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{storage}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="580" y="0" width="80" height="20" uuid="field8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{battery_life}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="660" y="0" width="80" height="20" uuid="field9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{performa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

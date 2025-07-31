@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="laporan_prioritas_kriteria" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1a1a1a1-0002-0002-0002-0002a1a1a1a2">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Awa"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<queryString>
+		<![CDATA[SELECT ROW_NUMBER() OVER() AS No, kd_kriteria, nama_kriteria, prioritas_kepentingan FROM kriteria]]>
+	</queryString>
+	<field name="No" class="java.lang.Integer"/>
+	<field name="kd_kriteria" class="java.lang.String"/>
+	<field name="nama_kriteria" class="java.lang.String"/>
+	<field name="prioritas_kepentingan" class="java.lang.String"/>
+	<title>
+		<band height="110" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="160" height="100" uuid="89419e31-10fb-461b-bdee-330c1d9862bc"/>
+				<imageExpression><![CDATA["https://github.com/hauntmuskie/ahp-awa/blob/main/src/image/alum.png?raw=true"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="150" y="10" width="500" height="25" uuid="ca8c35d2-4c24-4296-a322-f882787cc278"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PT ARJUNA LESTARI UTAMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="50" width="500" height="30" uuid="4f5bf7b3-5ef5-4950-8241-567a9d6172bc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[KAWASAN INDUSTRI JABABEKA V, Jl. Science Boulevard A2 No. 8  Desa Sertajaya, Kec. Cikarang Timur, Kab. Bekasi, Provinsi Jawa Barat,  Indonesia 17530.]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="219" y="20" width="372" height="28" uuid="cd0bb592-5cfa-4763-b385-003e47eeed45"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laporan Prioritas Kriteria]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="803" height="1" uuid="037523c3-22d2-4ef9-924c-10e026bd3727"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement x="120" y="0" width="60" height="30" uuid="c1c1c1c1-3001-3001-3001-3001c1c1c1c1"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="180" y="0" width="120" height="30" uuid="c1c1c1c1-3002-3002-3002-3002c1c1c1c2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="300" y="0" width="180" height="30" uuid="c1c1c1c1-3003-3003-3003-3003c1c1c1c3"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="480" y="0" width="180" height="30" uuid="c1c1c1c1-3004-3004-3004-3004c1c1c1c4"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="120" y="0" width="60" height="30" uuid="c81d6de7-4439-4640-ae19-ad137bf2bbe9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="120" height="30" uuid="be6b2f66-3764-4eef-a768-fecdd46762de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kode Kriteria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="180" height="30" uuid="ea41bec2-3347-49dd-a65b-a7a091bef897"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Kriteria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="180" height="30" uuid="3681a430-70a9-4f7d-b4c7-ce1642cd30e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prioritas Kepentingan]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="120" y="0" width="60" height="20" uuid="c1c1c1c1-3011-3011-3011-3011c1c1c1c1"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="180" y="0" width="120" height="20" uuid="c1c1c1c1-3012-3012-3012-3012c1c1c1c2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="300" y="0" width="180" height="20" uuid="c1c1c1c1-3013-3013-3013-3013c1c1c1c3"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="480" y="0" width="180" height="20" uuid="c1c1c1c1-3014-3014-3014-3014c1c1c1c4"/>
+			</rectangle>
+			<textField>
+				<reportElement x="120" y="0" width="60" height="20" uuid="9a6a7388-0457-4d93-8293-e49af787eabc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{No}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="120" height="20" uuid="26251696-c2a8-4eb9-b66e-316aa541c362"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kd_kriteria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="180" height="20" uuid="181f8786-518d-4727-93f7-946d8e3707dc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_kriteria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="180" height="20" uuid="062ee3df-4b41-4dff-92ef-76a77981f52a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prioritas_kepentingan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="169" splitType="Stretch">
+			<staticText>
+				<reportElement x="630" y="20" width="36" height="20" uuid="4f824766-79d3-4f1c-bcd0-844b5a9654b7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Bekasi, ]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="669" y="20" width="106" height="20" uuid="eaf10af2-cf8e-47f9-9e6c-9870a7f66a3b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="630" y="40" width="68" height="20" uuid="a6617aa7-3d61-4ff8-9ba4-cf45006051e4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Mengetahui,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="60" width="50" height="20" uuid="b99cc35e-9a16-4b0f-a7cf-ce87e42a6ece"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Manager]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="149" width="60" height="20" uuid="55d3317a-df44-4b2d-ba2a-313f1121ed56"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Feni Astuti]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>
