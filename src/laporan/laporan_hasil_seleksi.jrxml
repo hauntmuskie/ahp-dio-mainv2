@@ -157,40 +157,40 @@
 	<pageFooter>
 		<band height="169" splitType="Stretch">
 			<staticText>
-				<reportElement x="630" y="20" width="36" height="20" uuid="23f6fafe-56d9-4048-b455-3d0904ed2f4b"/>
+				<reportElement x="630" y="20" width="36" height="20" uuid="f5c5f23f-f310-4145-a013-e06c777deb41"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<text><![CDATA[Bogor, ]]></text>
 			</staticText>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="669" y="20" width="106" height="20" uuid="89d672c3-8e04-48cc-bf34-42416e20967e"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="630" y="40" width="68" height="20" uuid="ea9fedaf-ad1c-44ef-b925-0eb6193901e1"/>
+				<reportElement x="630" y="40" width="68" height="20" uuid="d1edf714-6ac0-4935-aac4-70c46516bf72"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<text><![CDATA[Mengetahui,]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="630" y="60" width="50" height="20" uuid="54315d56-3cdf-4172-92f4-d2c7afda927c"/>
+				<reportElement x="630" y="60" width="80" height="20" uuid="b1c9d99a-818c-48c0-bd5e-85f256c81b77"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<text><![CDATA[Pemilik Toko]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="630" y="149" width="60" height="20" uuid="93e87cc8-b9ae-46c1-86c3-cb64388afdb6"/>
+				<reportElement x="630" y="149" width="80" height="20" uuid="5cd54693-3844-4e6b-8049-aff94a87aa87"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<text><![CDATA[Andy Herawan]]></text>
 			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="669" y="20" width="106" height="20" uuid="bbec903e-eaf2-416b-81ea-225748f75a6b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>

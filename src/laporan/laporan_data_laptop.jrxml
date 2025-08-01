@@ -256,14 +256,14 @@
 				<text><![CDATA[Mengetahui,]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="630" y="60" width="50" height="20" uuid="54315d56-3cdf-4172-92f4-d2c7afda927c"/>
+				<reportElement x="630" y="60" width="80" height="20" uuid="54315d56-3cdf-4172-92f4-d2c7afda927c"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<text><![CDATA[Pemilik Toko]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="630" y="149" width="60" height="20" uuid="93e87cc8-b9ae-46c1-86c3-cb64388afdb6"/>
+				<reportElement x="630" y="149" width="80" height="20" uuid="93e87cc8-b9ae-46c1-86c3-cb64388afdb6"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
