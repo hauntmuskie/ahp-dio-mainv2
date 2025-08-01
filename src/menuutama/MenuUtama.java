@@ -650,7 +650,7 @@ public class MenuUtama extends javax.swing.JFrame {
 
     private void laporanDataSupplierMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_laporanDataSupplierMouseClicked
         try {
-            String report = "./src/laporan/laporan_laptop.jasper";
+            String report = "./src/laporan/laporan_data_laptop.jasper";
             HashMap<String, Object> param = new HashMap<>();
             JasperPrint print = JasperFillManager.fillReport(report, param, conn);
             JasperViewer.viewReport(print, false);
