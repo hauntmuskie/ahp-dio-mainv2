@@ -307,11 +307,11 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="6">
                     <StringItem index="0" value="- Pilih Kriteria -"/>
-                    <StringItem index="1" value="Kualitas"/>
+                    <StringItem index="1" value="Performa"/>
                     <StringItem index="2" value="Harga"/>
-                    <StringItem index="3" value="Layanan"/>
-                    <StringItem index="4" value="Ketepatan Pengiriman"/>
-                    <StringItem index="5" value="Ketepatan Jumlah"/>
+                    <StringItem index="3" value="Penyimpanan"/>
+                    <StringItem index="4" value="Ketahanan Baterai"/>
+                    <StringItem index="5" value="RAM"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -327,11 +327,11 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="6">
                     <StringItem index="0" value="- Pilih Kriteria -"/>
-                    <StringItem index="1" value="Kualitas"/>
+                    <StringItem index="1" value="Performa"/>
                     <StringItem index="2" value="Harga"/>
-                    <StringItem index="3" value="Layanan"/>
-                    <StringItem index="4" value="Ketepatan Pengiriman"/>
-                    <StringItem index="5" value="Ketepatan Jumlah"/>
+                    <StringItem index="3" value="Penyimpanan"/>
+                    <StringItem index="4" value="Ketahanan Baterai"/>
+                    <StringItem index="5" value="RAM"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -347,11 +347,11 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="6">
                     <StringItem index="0" value="- Pilih Kriteria -"/>
-                    <StringItem index="1" value="Kualitas"/>
+                    <StringItem index="1" value="Performa"/>
                     <StringItem index="2" value="Harga"/>
-                    <StringItem index="3" value="Layanan"/>
-                    <StringItem index="4" value="Ketepatan Pengiriman"/>
-                    <StringItem index="5" value="Ketepatan Jumlah"/>
+                    <StringItem index="3" value="Penyimpanan"/>
+                    <StringItem index="4" value="Ketahanan Baterai"/>
+                    <StringItem index="5" value="RAM"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -367,11 +367,11 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="6">
                     <StringItem index="0" value="- Pilih Kriteria -"/>
-                    <StringItem index="1" value="Kualitas"/>
+                    <StringItem index="1" value="Performa"/>
                     <StringItem index="2" value="Harga"/>
-                    <StringItem index="3" value="Layanan"/>
-                    <StringItem index="4" value="Ketepatan Pengiriman"/>
-                    <StringItem index="5" value="Ketepatan Jumlah"/>
+                    <StringItem index="3" value="Penyimpanan"/>
+                    <StringItem index="4" value="Ketahanan Baterai"/>
+                    <StringItem index="5" value="RAM"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -398,11 +398,11 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="6">
                     <StringItem index="0" value="- Pilih Kriteria -"/>
-                    <StringItem index="1" value="Kualitas"/>
+                    <StringItem index="1" value="Performa"/>
                     <StringItem index="2" value="Harga"/>
-                    <StringItem index="3" value="Layanan"/>
-                    <StringItem index="4" value="Ketepatan Pengiriman"/>
-                    <StringItem index="5" value="Ketepatan Jumlah"/>
+                    <StringItem index="3" value="Penyimpanan"/>
+                    <StringItem index="4" value="Ketahanan Baterai"/>
+                    <StringItem index="5" value="RAM"/>
                   </StringArray>
                 </Property>
               </Properties>

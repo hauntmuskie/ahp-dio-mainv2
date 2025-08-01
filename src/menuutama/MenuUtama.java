@@ -26,7 +26,7 @@ public class MenuUtama extends javax.swing.JFrame {
      */
     public MenuUtama() {
         initComponents();
-        Locale locale = new Locale("id", "ID");
+        Locale locale = Locale.forLanguageTag("id-ID");
         Locale.setDefault(locale);
         setVisible(true);
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);

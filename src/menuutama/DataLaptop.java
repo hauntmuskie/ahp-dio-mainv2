@@ -38,9 +38,6 @@ public class DataLaptop extends javax.swing.JPanel {
                 "Merk",
                 "Harga",
                 "Processor",
-                "RAM",
-                "Storage",
-                "Battery Life",
                 "Performa",
                 "Kategori Harga",
                 "Kategori Penyimpanan",
@@ -62,16 +59,13 @@ public class DataLaptop extends javax.swing.JPanel {
                 String c = hasil.getString("merk");
                 String d = hasil.getString("harga");
                 String e = hasil.getString("processor");
-                String f = hasil.getString("ram");
-                String g = hasil.getString("storage");
-                String h = hasil.getString("battery_life");
                 String i = hasil.getString("performa");
                 String j = hasil.getString("kategori_harga");
                 String k = hasil.getString("kategori_penyimpanan");
                 String l = hasil.getString("kategori_daya_tahan");
                 String m = hasil.getString("kategori_ram");
 
-                String[] data = { a, b, c, d, e, f, g, h, i, j, k, l, m };
+                String[] data = { a, b, c, d, e, i, j, k, l, m };
                 tabmode.addRow(data);
             }
         } catch (SQLException e) {
@@ -89,17 +83,15 @@ public class DataLaptop extends javax.swing.JPanel {
         String c = tabmode.getValueAt(bar, 2).toString();
         String d = tabmode.getValueAt(bar, 3).toString();
         String e = tabmode.getValueAt(bar, 4).toString();
-        String f = tabmode.getValueAt(bar, 5).toString();
-        String g = tabmode.getValueAt(bar, 6).toString();
-        String h = tabmode.getValueAt(bar, 7).toString();
-        String i = tabmode.getValueAt(bar, 8).toString();
-        String j = tabmode.getValueAt(bar, 9).toString();
-        String k = tabmode.getValueAt(bar, 10).toString();
-        String l = tabmode.getValueAt(bar, 11).toString();
-        String m = tabmode.getValueAt(bar, 12).toString();
+        String i = tabmode.getValueAt(bar, 5).toString();
+        String j = tabmode.getValueAt(bar, 6).toString();
+        String k = tabmode.getValueAt(bar, 7).toString();
+        String l = tabmode.getValueAt(bar, 8).toString();
+        String m = tabmode.getValueAt(bar, 9).toString();
 
         noId = a;
-        dialog.setDataTabel(a, b, c, d, e, f, g, h, i, j, k, l, m);
+        // Maintain the correct parameter order for setDataTabel method
+        dialog.setDataTabel(a, b, c, d, e, "", "", "", i, j, k, l, m);
     }
 
     protected void hapusDataLaptop() {
@@ -166,7 +158,7 @@ public class DataLaptop extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID Laptop", "Nama Laptop", "Merk", "Bobot Laptop", "Tahun Produksi", "Performa", "Harga", "Penyimpanan", "Ketahanan Baterai", "Ram"
+                "ID Laptop", "Nama Laptop", "Merk", "Harga", "Processor", "Performa", "Kategori Harga", "Kategori Penyimpanan", "Kategori Daya Tahan", "Kategori RAM"
             }
         ));
         tabelDataLaptop.addMouseListener(new java.awt.event.MouseAdapter() {

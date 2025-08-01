@@ -5,10 +5,10 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
-import javax.swing.table.DefaultTableModel;
 import koneksi.Koneksi;
 
 /**
@@ -17,7 +17,6 @@ import koneksi.Koneksi;
  */
 public class DialogTambahData extends javax.swing.JDialog {
     private Connection conn = new Koneksi().connect();
-    private DefaultTableModel tabmode;
 
     /**
      * Creates new form DialogTambahData
@@ -25,6 +24,11 @@ public class DialogTambahData extends javax.swing.JDialog {
     public DialogTambahData(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        // Disable ID field and make it display-only
+        tNoId.setEditable(false);
+        tNoId.setBackground(new java.awt.Color(240, 240, 240)); // Light gray background
+        tNoId.setToolTipText("ID akan dihasilkan otomatis");
 
         // add Panel, add panel(sebuah panel)
         Pane.add(PanelKandidat);
@@ -35,7 +39,7 @@ public class DialogTambahData extends javax.swing.JDialog {
     public void setDataTabel(String id_laptop, String nama_laptop, String merk, String harga, String processor,
             String ram, String storage, String battery_life, String performa, String kategori_harga,
             String kategori_penyimpanan, String kategori_daya_tahan, String kategori_ram) {
-        tNoId.setText(id_laptop);
+        tNoId.setText(id_laptop); // Show existing ID for editing (read-only)
         tNamaLaptop.setText(nama_laptop);
         tMerk.setText(merk);
         tNoBobot.setText(harga); // Price field
@@ -48,7 +52,20 @@ public class DialogTambahData extends javax.swing.JDialog {
     }
 
     protected void kosong() {
-        tNoId.setText("");
+        // Generate and display next auto ID when clearing form
+        try {
+            String sqlGetId = "SELECT CONCAT('LP', LPAD(COALESCE(MAX(CAST(SUBSTRING(id_laptop, 3) AS UNSIGNED)), 0) + 1, 3, '0')) as next_id FROM data_laptop WHERE id_laptop REGEXP '^LP[0-9]+$'";
+            java.sql.Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlGetId);
+            if (rs.next()) {
+                tNoId.setText(rs.getString("next_id"));
+            } else {
+                tNoId.setText("LP001"); // Fallback if no records exist
+            }
+        } catch (SQLException e) {
+            tNoId.setText("LP001"); // Fallback on error
+        }
+        
         tNamaLaptop.setText("");
         tMerk.setText("");
         tNoBobot.setText("");
@@ -61,14 +78,48 @@ public class DialogTambahData extends javax.swing.JDialog {
     }
 
     private void insertDataPaket() {
-        String sql = "INSERT INTO data_laptop (id_laptop, nama_laptop, merk, harga, processor, ram, storage, battery_life, performa, kategori_harga, kategori_penyimpanan, kategori_daya_tahan, kategori_ram) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        // Validate required fields
+        if (tNamaLaptop.getText().trim().isEmpty() || 
+            tMerk.getText().trim().isEmpty() || 
+            tNoBobot.getText().trim().isEmpty() || 
+            tTahun.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Semua field harus diisi!");
+            return;
+        }
+        
         try {
+            // Auto-generate unique laptop ID
+            String laptopId = "";
+            String sqlGetId = "SELECT CONCAT('LP', LPAD(COALESCE(MAX(CAST(SUBSTRING(id_laptop, 3) AS UNSIGNED)), 0) + 1, 3, '0')) as next_id FROM data_laptop WHERE id_laptop REGEXP '^LP[0-9]+$'";
+            java.sql.Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlGetId);
+            if (rs.next()) {
+                laptopId = rs.getString("next_id");
+            } else {
+                laptopId = "LP001"; // Fallback if no records exist
+            }
+            
+            // Update the ID field to show the generated ID
+            tNoId.setText(laptopId);
+            
+            // Validate price format
+            double harga;
+            try {
+                harga = Double.parseDouble(tNoBobot.getText().trim());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Format harga tidak valid!");
+                return;
+            }
+            
+            // Insert data using direct SQL with auto-generated ID
+            String sql = "INSERT INTO data_laptop (id_laptop, nama_laptop, merk, harga, processor, ram, storage, battery_life, performa, kategori_harga, kategori_penyimpanan, kategori_daya_tahan, kategori_ram) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement stat = conn.prepareStatement(sql);
-            stat.setString(1, tNoId.getText());
-            stat.setString(2, tNamaLaptop.getText());
-            stat.setString(3, tMerk.getText());
-            stat.setString(4, tNoBobot.getText()); // harga (price)
-            stat.setString(5, tTahun.getText()); // processor
+            
+            stat.setString(1, laptopId);
+            stat.setString(2, tNamaLaptop.getText().trim());
+            stat.setString(3, tMerk.getText().trim());
+            stat.setDouble(4, harga);
+            stat.setString(5, tTahun.getText().trim()); // processor
             stat.setString(6, "8GB"); // ram (default value)
             stat.setString(7, "256GB SSD"); // storage (default value)
             stat.setString(8, "8 jam"); // battery_life (default value)
@@ -77,23 +128,47 @@ public class DialogTambahData extends javax.swing.JDialog {
             stat.setString(11, cbPenyimpanan.getSelectedItem().toString());
             stat.setString(12, cbKetepatanKetahananBaterai.getSelectedItem().toString());
             stat.setString(13, cbKetepatanRam.getSelectedItem().toString());
+            
             stat.executeUpdate();
-            JOptionPane.showMessageDialog(null, "DATA Berhasil Disimpan");
-            kosong();
-            tNoId.requestFocus();
+            JOptionPane.showMessageDialog(null, "DATA Berhasil Disimpan dengan ID: " + laptopId);
+            kosong(); // This will auto-generate the next ID
+            tNamaLaptop.requestFocus(); // Focus on first editable field
+            
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Data Gagal Disimpan " + e);
+            System.err.println("SQL Error: " + e);
+            JOptionPane.showMessageDialog(null, "Data Gagal Disimpan: " + e.getMessage());
         }
     }
 
     private void editDataPaket() {
+        // Validate required fields
+        if (tNamaLaptop.getText().trim().isEmpty() || 
+            tMerk.getText().trim().isEmpty() || 
+            tNoBobot.getText().trim().isEmpty() || 
+            tTahun.getText().trim().isEmpty() ||
+            tNoId.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Semua field harus diisi!");
+            return;
+        }
+        
         try {
-            String sql = "UPDATE data_laptop set nama_laptop=?, merk=?, harga=?, processor=?, ram=?, storage=?, battery_life=?, performa=?, kategori_harga=?, kategori_penyimpanan=?, kategori_daya_tahan=?, kategori_ram=? WHERE id_laptop=?";
+            // Validate price format
+            double harga;
+            try {
+                harga = Double.parseDouble(tNoBobot.getText().trim());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Format harga tidak valid!");
+                return;
+            }
+            
+            // Update data using direct SQL
+            String sql = "UPDATE data_laptop SET nama_laptop=?, merk=?, harga=?, processor=?, ram=?, storage=?, battery_life=?, performa=?, kategori_harga=?, kategori_penyimpanan=?, kategori_daya_tahan=?, kategori_ram=? WHERE id_laptop=?";
             PreparedStatement stat = conn.prepareStatement(sql);
-            stat.setString(1, tNamaLaptop.getText());
-            stat.setString(2, tMerk.getText());
-            stat.setString(3, tNoBobot.getText()); // harga (price)
-            stat.setString(4, tTahun.getText()); // processor
+            
+            stat.setString(1, tNamaLaptop.getText().trim());
+            stat.setString(2, tMerk.getText().trim());
+            stat.setDouble(3, harga);
+            stat.setString(4, tTahun.getText().trim()); // processor
             stat.setString(5, "8GB"); // ram (default)
             stat.setString(6, "256GB SSD"); // storage (default)
             stat.setString(7, "8 jam"); // battery_life (default)
@@ -102,13 +177,16 @@ public class DialogTambahData extends javax.swing.JDialog {
             stat.setString(10, cbPenyimpanan.getSelectedItem().toString());
             stat.setString(11, cbKetepatanKetahananBaterai.getSelectedItem().toString());
             stat.setString(12, cbKetepatanRam.getSelectedItem().toString());
-            stat.setString(13, tNoId.getText()); // WHERE condition
+            stat.setString(13, tNoId.getText().trim()); // WHERE condition
+            
             stat.executeUpdate();
-            JOptionPane.showMessageDialog(null, "DATA Berhasil Diubah");
-            kosong();
-            tNoId.requestFocus();
+            JOptionPane.showMessageDialog(null, "DATA Berhasil Diubah untuk ID: " + tNoId.getText().trim());
+            kosong(); // This will generate next available ID for new entry
+            tNamaLaptop.requestFocus(); // Focus on first editable field
+            
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Data Gagal Diubah " + e);
+            System.err.println("SQL Error: " + e);
+            JOptionPane.showMessageDialog(null, "Data Gagal Diubah: " + e.getMessage());
         }
     }
 
@@ -117,8 +195,6 @@ public class DialogTambahData extends javax.swing.JDialog {
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -142,14 +218,12 @@ public class DialogTambahData extends javax.swing.JDialog {
         jLabel22 = new javax.swing.JLabel();
         tNamaLaptop = new javax.swing.JTextField();
         tNoBobot = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tTahun = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         tNoId = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         tMerk = new javax.swing.JTextField();
+        tTahun = new javax.swing.JTextField();
         tombolTambah = new javax.swing.JLabel();
-        IsiKosong = new javax.swing.JOptionPane();
         Pane = new javax.swing.JPanel();
 
         PanelKandidat.setBackground(new java.awt.Color(255, 237, 192));
@@ -182,7 +256,7 @@ public class DialogTambahData extends javax.swing.JDialog {
         judul.setOpaque(true);
 
         jPanel12.setBackground(new java.awt.Color(26, 42, 128));
-        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Penilaian Bobot Laptop", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(255, 237, 192))); // NOI18N
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Penilaian Kriteria Laptop", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(255, 237, 192))); // NOI18N
         jPanel12.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
         jLabel25.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -282,24 +356,19 @@ public class DialogTambahData extends javax.swing.JDialog {
 
         jLabel21.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 237, 192));
-        jLabel21.setText("Tahun Produksi");
+        jLabel21.setText("Processor");
 
         jLabel22.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 237, 192));
-        jLabel22.setText("Bobot Laptop");
+        jLabel22.setText("Harga");
 
         tNamaLaptop.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
         tNoBobot.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
-        tTahun.setColumns(20);
-        tTahun.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        tTahun.setRows(5);
-        jScrollPane3.setViewportView(tTahun);
-
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 237, 192));
-        jLabel9.setText("No Id");
+        jLabel9.setText("ID Laptop (Auto)");
 
         tNoId.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
@@ -308,6 +377,8 @@ public class DialogTambahData extends javax.swing.JDialog {
         jLabel8.setText("Merk Laptop");
 
         tMerk.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+
+        tTahun.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -321,13 +392,17 @@ public class DialogTambahData extends javax.swing.JDialog {
                     .addComponent(jLabel22)
                     .addComponent(jLabel9)
                     .addComponent(jLabel8))
-                .addGap(48, 48, 48)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tNamaLaptop)
-                    .addComponent(tNoId)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tNoBobot)
-                    .addComponent(tMerk))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tNamaLaptop, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                            .addComponent(tNoId)
+                            .addComponent(tNoBobot)
+                            .addComponent(tMerk)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tTahun)))
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -350,10 +425,10 @@ public class DialogTambahData extends javax.swing.JDialog {
                     .addComponent(tNoBobot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel22))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(130, Short.MAX_VALUE))
+                    .addComponent(tTahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         tombolTambah.setBackground(new java.awt.Color(26, 42, 128));
@@ -407,7 +482,7 @@ public class DialogTambahData extends javax.swing.JDialog {
                 .addGroup(PanelKandidatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -529,7 +604,6 @@ public class DialogTambahData extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JOptionPane IsiKosong;
     private javax.swing.JPanel Pane;
     private javax.swing.JPanel PanelKandidat;
     private javax.swing.JComboBox<String> cbHarga;
@@ -549,13 +623,12 @@ public class DialogTambahData extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel judul;
     private javax.swing.JTextField tMerk;
     private javax.swing.JTextField tNamaLaptop;
     private javax.swing.JTextField tNoBobot;
     private javax.swing.JTextField tNoId;
-    private javax.swing.JTextArea tTahun;
+    private javax.swing.JTextField tTahun;
     private javax.swing.JLabel tombolEdit;
     private javax.swing.JLabel tombolTambah;
     // End of variables declaration//GEN-END:variables

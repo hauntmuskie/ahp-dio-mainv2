@@ -78,13 +78,14 @@ public class KriteriaAhp {
 
     // set Nilai
     public void setNilaiKriteria() {
-        // nilai dari matriks berapasangan kriteria
+        // nilai dari matriks berapasangan kriteria berdasarkan penelitian
+        // Tabel 4.4 Matriks Perbandingan Berpasangan dari paper penelitian
         double matriks[][] = {
-                { 1, 3.0, 5.0, 7.0, 9.0 },
-                { 1.0 / 3.0, 1, 3.0, 5.0, 7.0 },
-                { 1.0 / 5.0, 1.0 / 3.0, 1, 3.0, 5.0 },
-                { 1.0 / 7.0, 1.0 / 5.0, 1.0 / 3.0, 1, 3.0 },
-                { 1.0 / 9.0, 1.0 / 7.0, 1.0 / 5.0, 1.0 / 3.0, 1 }
+                { 1, 2.0, 3.0, 3.0, 4.0 },              // K1: Performa
+                { 1.0 / 2.0, 1, 2.0, 2.0, 3.0 },        // K2: Harga
+                { 1.0 / 3.0, 1.0 / 2.0, 1, 2.0, 3.0 },  // K3: Penyimpanan
+                { 1.0 / 3.0, 1.0 / 2.0, 1.0 / 2.0, 1, 2.0 }, // K4: Ketahanan Baterai
+                { 1.0 / 4.0, 1.0 / 3.0, 1.0 / 3.0, 1.0 / 2.0, 1 } // K5: RAM
         };
         for (int row = 0; row < nBanyak; row++) {
             for (int col = 0; col < nBanyak; col++) {

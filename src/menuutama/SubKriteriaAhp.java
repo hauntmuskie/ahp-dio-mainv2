@@ -119,15 +119,10 @@ public class SubKriteriaAhp {
             }
         }
 
-        // mencari nilai terbesar atau maks dari prioritas untuk prioritas SubKriteria
-        double maxNum = prioritas5x5[0];
-        for (double j : prioritas5x5) {
-            if (j > maxNum)
-                maxNum = j;
-        }
+        // Sub criteria priorities adalah hasil normalisasi (bukan dibagi dengan nilai maksimum)
+        // Sesuai dengan paper penelitian, prioritas sub kriteria langsung menggunakan nilai prioritas
         for (int i = 0; i < nBanyak5x5; i++) {
-            // Perhitungan Prioritas SubKriteria
-            prioritasSub5x5[i] = prioritas5x5[i] / maxNum;
+            prioritasSub5x5[i] = prioritas5x5[i];
         }
     }
 
