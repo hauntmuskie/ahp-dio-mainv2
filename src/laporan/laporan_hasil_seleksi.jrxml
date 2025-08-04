@@ -185,7 +185,7 @@
 				<text><![CDATA[Andy Herawan]]></text>
 			</staticText>
 			<textField pattern="EEEE, dd MMMM yyyy">
-				<reportElement x="669" y="20" width="106" height="20" uuid="bbec903e-eaf2-416b-81ea-225748f75a6b"/>
+				<reportElement x="669" y="20" width="141" height="20" uuid="bbec903e-eaf2-416b-81ea-225748f75a6b"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
